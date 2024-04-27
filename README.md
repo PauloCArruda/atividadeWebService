@@ -11,7 +11,8 @@
     CRUD
         Enviar evidências (print) que que a aplicação está fazendo persistência/consulta de dados a partir do banco de dados. O banco utilizado, pode ser o H2 ou qualquer outro (postgresql, mysql, etc.)
     Enviar o link do github.
-    ![image](https://github.com/PauloCArruda/atividadeWebService/assets/144564435/607ca7e0-918a-414b-bfd6-ace4620350bf)
+
+![image](https://github.com/PauloCArruda/atividadeWebService/assets/144564435/7e9db2e1-dbf2-47a8-b198-8e58bf92e9b3)
 
 
 ## Aluno: Paulo Cesar Junio Arruda Silva 
