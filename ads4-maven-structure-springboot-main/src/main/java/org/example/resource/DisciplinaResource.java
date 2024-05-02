@@ -18,7 +18,7 @@ import java.util.List;
 
 @Slf4j //nos ajuda a escrever log no projeto
 @RestController //inicida que é uma camada para api
-@RequestMapping("api/v1/disciplina")
+@RequestMapping("api/v2/disciplina")
 public class DisciplinaResource implements IResource<Disciplina, Integer> {
 
     @Autowired //injeção de dependência
@@ -59,7 +59,11 @@ public class DisciplinaResource implements IResource<Disciplina, Integer> {
     })
 
     @Override
-    public Disciplina create(Disciplina entity) {
+    public Disciplina create(@RequestBody Disciplina entity) {
+
+        log.info("Cadastro do disciplina");
+        log.debug("Informações do disciplina: {}", entity);
+
         return disciplinaService.create(entity);
     }
 
@@ -72,7 +76,7 @@ public class DisciplinaResource implements IResource<Disciplina, Integer> {
 
 
     @GetMapping(
-            value = "/{id}", //http://localhost:8080/api/v1/aluno/1
+            value = "/{id}", //http://localhost:8080/api/v2/disciplina/1
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(
             summary = "Recupera uma disciplina baseado em um identificador",
@@ -95,17 +99,7 @@ public class DisciplinaResource implements IResource<Disciplina, Integer> {
             @ApiResponse(responseCode = "304", content = {@Content(schema = @Schema(implementation = Disciplina.class), mediaType = MediaType.APPLICATION_JSON_VALUE)}),
     })
     @Override
-    public Disciplina get(Integer id) {
-
-        return disciplinaService.get(id);
-    }
-
-    /**
-     * Retorna uma lista de T
-     *
-     * @return
-     */
-
+    public Disciplina get(@PathVariable ("id") Integer id) { return disciplinaService.get(id);}
     @GetMapping(
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
@@ -172,8 +166,7 @@ public class DisciplinaResource implements IResource<Disciplina, Integer> {
             @ApiResponse(responseCode = "409", content = {@Content(schema = @Schema(implementation = Disciplina.class), mediaType = MediaType.APPLICATION_JSON_VALUE)})
     })
     @Override
-    public Disciplina update(Integer id, Disciplina entity) {
-        return disciplinaService.update(id,entity);
+    public Disciplina update(@PathVariable Integer id, @RequestBody Disciplina entity) { return disciplinaService.update(id,entity);
     }
 
     /**
@@ -207,7 +200,7 @@ public class DisciplinaResource implements IResource<Disciplina, Integer> {
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Disciplina.class), mediaType = MediaType.APPLICATION_JSON_VALUE)}),
     })
     @Override
-    public void delete(Integer id) {
+    public void delete(@PathVariable Integer id) {
         disciplinaService.delete(id);
     }
 }

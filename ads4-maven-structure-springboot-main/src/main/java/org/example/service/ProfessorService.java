@@ -67,7 +67,8 @@ public class ProfessorService implements IService<Professor, Integer> {
         }
         else{
             //return null;
-            return new Professor();
+            Professor professor = new Professor();
+            return professor;
         }
     }
 

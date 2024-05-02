@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j //nos ajuda a escrever log no projeto
 @RestController //inicida que é uma camada para api
-@RequestMapping("api/v1/turma")
+@RequestMapping("api/v2/turma")
 @Tag(name = "turma", description = "documentação do resource turma")
 public class TurmaResource implements IResource<Turma, Integer> {
 
@@ -72,7 +72,7 @@ public class TurmaResource implements IResource<Turma, Integer> {
      * @return
      */
     @GetMapping(
-            value = "/{id}", //http://localhost:8080/api/v1/turma/1
+            value = "/{id}", //http://localhost:8080/api/v2/turma/1
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(
             summary = "Recupera uma turma baseado em um identificador",
@@ -99,18 +99,13 @@ public class TurmaResource implements IResource<Turma, Integer> {
         return turmaService.get(id);
     }
 
-    /**
-     * Retorna uma lista de T
-     *
-     * @return
-     */
     @GetMapping(
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
     @Operation(
             summary = "Recupera uma lista de turmas",
             description = "Método responsável para recuperar uma lista de turmas",
-            tags = {"curso"})
+            tags = {"turma"})
     @ApiResponses({
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = Turma.class), mediaType = MediaType.APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "405", content = {@Content(schema = @Schema(implementation = Turma.class), mediaType = MediaType.APPLICATION_JSON_VALUE)}),

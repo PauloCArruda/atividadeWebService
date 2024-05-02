@@ -19,7 +19,7 @@ import java.util.List;
 
 @Slf4j //nos ajuda a escrever log no projeto
 @RestController //inicida que é uma camada para api
-@RequestMapping("api/v1/aluno")
+@RequestMapping("api/v2/aluno")
 @Tag(name = "aluno", description = "documentação do resource aluno")
 public class AlunoResource implements IResource<Aluno, Integer> {
 
@@ -74,7 +74,7 @@ public class AlunoResource implements IResource<Aluno, Integer> {
      * @return
      */
     @GetMapping(
-            value = "/{id}", //http://localhost:8080/api/v1/aluno/1
+            value = "/{id}", //http://localhost:8080/api/v2/aluno/1
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(
             summary = "Recupera um aluno baseado em um identificador",

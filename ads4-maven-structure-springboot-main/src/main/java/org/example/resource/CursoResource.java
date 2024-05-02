@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.example.interfaces.IResource;
 import org.example.model.Curso;
+import org.example.model.Turma;
 import org.example.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Slf4j //nos ajuda a escrever log no projeto
 @RestController //inicida que é uma camada para api
-@RequestMapping("api/v1/curso")
+@RequestMapping("api/v2/curso")
 @Tag(name = "curso", description = "documentação do resource curso")
 public class CursoResource implements IResource<Curso, Integer> {
 
@@ -72,11 +73,11 @@ public class CursoResource implements IResource<Curso, Integer> {
      * @return
      */
     @GetMapping(
-            value = "/{id}", //http://localhost:8080/api/v1/curso/1
+            value = "/{id}", //http://localhost:8080/api/v2/curso/1
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(
             summary = "Recupera um curso baseado em um identificador",
-            description = "Método responsável para recuperar um aluno no sistema baseado no identificador",
+            description = "Método responsável para recuperar um curso no sistema baseado no identificador",
             tags = {"curso"})
     @ApiResponses({
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = Curso.class), mediaType = MediaType.APPLICATION_JSON_VALUE)}),
@@ -99,11 +100,6 @@ public class CursoResource implements IResource<Curso, Integer> {
         return cursoService.get(id);
     }
 
-    /**
-     * Retorna uma lista de T
-     *
-     * @return
-     */
     @GetMapping(
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
@@ -129,6 +125,7 @@ public class CursoResource implements IResource<Curso, Integer> {
             @ApiResponse(responseCode = "304", content = {@Content(schema = @Schema(implementation = Curso.class), mediaType = MediaType.APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "416", content = {@Content(schema = @Schema(implementation = Curso.class), mediaType = MediaType.APPLICATION_JSON_VALUE)})
     })
+
     @Override
     public List<Curso> get() {
         return cursoService.get();
@@ -147,7 +144,7 @@ public class CursoResource implements IResource<Curso, Integer> {
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
     @Operation(
-            summary = "Atualiza todos os dados de um aluno",
+            summary = "Atualiza todos os dados de um curso",
             description = "Método responsável para atualizar todos os dados de um curso.",
             tags = {"curso"})
     @ApiResponses({

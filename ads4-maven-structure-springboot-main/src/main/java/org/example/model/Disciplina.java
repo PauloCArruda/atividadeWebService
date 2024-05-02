@@ -20,4 +20,8 @@ public class Disciplina {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String descricao;
+    private Integer cargaHoraria;
+    private String ementa;
+    private String bibliografia;
 }

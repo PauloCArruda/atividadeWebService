@@ -18,7 +18,7 @@ import java.util.List;
 
 @Slf4j //nos ajuda a escrever log no projeto
 @RestController //inicida que é uma camada para api
-@RequestMapping("api/v1/professor")
+@RequestMapping("api/v2/professor")
 public class ProfessorResource implements IResource<Professor, Integer> {
 
     @Autowired //injeção de dependência
@@ -59,7 +59,12 @@ public class ProfessorResource implements IResource<Professor, Integer> {
     })
 
     @Override
-    public Professor create(Professor entity) {
+    public Professor create(@RequestBody Professor entity) {
+
+        log.info("Cadastro do aluno iniciado");
+        log.debug("Informações do Professor: {}", entity);
+
+
         return professorService.create(entity);
     }
 
@@ -71,7 +76,7 @@ public class ProfessorResource implements IResource<Professor, Integer> {
      */
 
     @GetMapping(
-            value = "/{id}", //http://localhost:8080/api/v1/aluno/1
+            value = "/{id}", //http://localhost:8080/api/v2/professor/1
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(
             summary = "Recupera um professor baseado em um identificador",
@@ -170,8 +175,7 @@ public class ProfessorResource implements IResource<Professor, Integer> {
             @ApiResponse(responseCode = "409", content = {@Content(schema = @Schema(implementation = Professor.class), mediaType = MediaType.APPLICATION_JSON_VALUE)})
     })
     @Override
-    public Professor update(Integer id, Professor entity) {
-        return professorService.update(id,entity);
+    public Professor update(@PathVariable Integer id, @RequestBody Professor entity) { return professorService.update(id,entity);
     }
 
     /**
@@ -203,7 +207,7 @@ public class ProfessorResource implements IResource<Professor, Integer> {
             @ApiResponse(responseCode = "204", content = {@Content(schema = @Schema(implementation = Professor.class), mediaType = MediaType.APPLICATION_JSON_VALUE)}),
     })
     @Override
-    public void delete(Integer id) {
+    public void delete(@PathVariable Integer id) {
         professorService.delete(id);
     }
 }

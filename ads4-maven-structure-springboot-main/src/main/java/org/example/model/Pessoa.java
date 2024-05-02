@@ -1,36 +1,34 @@
 package org.example.model;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data //lomok ajuda com os métodos: get,set,tostring, @equals
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-/*lombok*/
-/*jpa/hibernate*/
-@Entity
-@Table(name = "PESSOA")
-/*jpa/hibernate*/
+
+// retirar @Entity e @Table para evitar conflito
+
+@MappedSuperclass // indica uma super classe que fornece atributos comuns (Aluno e Professor)
 public class Pessoa {
 
     public void interfaceFluente(){
-        Pessoa xpto = Pessoa.builder().nome("").endereco("").telefone("").build();
+        Pessoa pessoaBuilder = Pessoa.builder().nome("").endereco("").telefone("").build();
     }
 
-    //@Getter
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
 
-    //@Getter
-    //@Setter
-    @Column(name = "PESSOA", length = 50, nullable = false)
+    @Column(name = "NOME", length = 50, nullable = false)
     private String nome;
-    private String endereco ;
+
+    @NotBlank(message = "O Endereço é obrigatória")
+    @Column(name = "ENDERECO", length = 100, nullable = false)
+    private String endereco;
+
+    @Column(name = "TELEFONE", length = 20, nullable = false)
     private String telefone;
-    private boolean ativo;
 
 }
+
+

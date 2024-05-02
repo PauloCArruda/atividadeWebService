@@ -1,43 +1,26 @@
 package org.example.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-/*lombok*/
-@Data //lomok ajuda com os métodos: get,set,tostring, @equals
-@Builder
+@EqualsAndHashCode(callSuper = true)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-/*lombok*/
-/*jpa/hibernate*/
+
 @Entity
 @Table(name = "ALUNO")
-/*jpa/hibernate*/
-public class Aluno {
+public class Aluno extends Pessoa {
 
-
-    /**
-     * @see <a href="https://en.wikipedia.org/wiki/Fluent_interface">Interface Fluent</a>
-     */
-    public void interfaceFluente(){
-        Aluno xpto = Aluno.builder().matricula("").situacao("").build();
-    }
-
-    //@Getter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    //@Getter
-    //@Setter
 
-    @Column(name = "ALUNO", length = 50, nullable = false)
-
+    @Column(name = "MATRICULA", length = 50, nullable = false)
     private String matricula;
+
+    @Column(name = "SITUACAO", length = 50, nullable = false)
     private String situacao;
-    private boolean ativo;
 
 }
